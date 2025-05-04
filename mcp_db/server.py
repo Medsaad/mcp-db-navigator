@@ -22,11 +22,11 @@ from mcp_db.metrics import MetricsTracker, track_query_metrics
 # Logging Configuration
 # ==============================================================================
 logging.basicConfig(
-    level=logging.DEBUG,  # Set to DEBUG for detailed development logs
+    level=logging.INFO, 
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(sys.stdout), # Log to console
-        logging.FileHandler('mcp.log')      # Log to file
+        logging.FileHandler(os.path.join(os.path.expanduser('~'), '.mcp', 'mcp-db.log'))      # Log to file
     ]
 )
 logger = logging.getLogger(__name__)
@@ -375,4 +375,4 @@ def main_cli():
     parser = argparse.ArgumentParser(description="MySQL Navigator MCP Server")
     parser.add_argument('--config', type=str, required=True, help="Path to .env file with DB credentials")
     args = parser.parse_args()
-    run_server(args.config) 
+    run_server(args.config)

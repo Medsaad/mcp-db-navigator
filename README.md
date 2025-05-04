@@ -40,43 +40,38 @@ DB_MAX_RETRIES=3  # Optional: number of connection retries
 DB_RETRY_DELAY=1.0  # Optional: delay between retries in seconds
 ```
 
-## Usage
+## Usage Examples
 
-Start the MCP server with your `.env` file:
+### 1. Command Line
+Run the MCP server directly from your terminal:
 ```bash
 mcp-db --config /path/to/your/project/.env
 ```
 
-- The `--config` argument is required and should point to your `.env` file containing DB credentials.
+### 2. In Cursor
+To use this MCP server in [Cursor](https://www.cursor.so):
+- Open Cursor settings and add a new MCP server.
+- Use the following configuration (example):
 
-### Example Workflow
-
-1. Connect to a database:
-```python
-connection = connect_to_database()
-```
-
-2. Switch to a different database:
-```python
-connection = switch_database("another_database_name")
-```
-
-3. Get database schema:
-```python
-schema = load_database_schema()
-```
-
-4. Execute queries using the following structure:
-```python
-query = {
-    "table_name": "your_table",
-    "select_fields": ["*"],
-    "where_conditions": {"column": "value"},
-    "order_by": ["column_name"],
-    "order_direction": "ASC",
-    "limit": 10
+```json
+{
+  "mcpServers": {
+    "mysql-navigator": {
+      "command": "mcp-db",
+      "args": [
+        "--config",
+        "/absolute/path/to/your/.env"
+      ]
+    }
+  }
 }
 ```
+- Make sure the path to your `.env` file is absolute.
+
+### 3. In Claude Desktop
+If Claude Desktop supports MCP servers:
+- Add a new MCP server and point it to the `mcp-db` command with the `--config` argument as above.
+- Refer to Claude Desktop's documentation for details on adding custom MCP servers.
 
 ## Query Parameters
 

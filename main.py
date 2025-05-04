@@ -1,5 +1,5 @@
-from mcp_db.server import run_server
+from mcp_db.server import main_cli
 
 if __name__ == "__main__":
-    run_server()
+    main_cli()
 
