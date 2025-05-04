@@ -1,6 +1,6 @@
 [project]
 name = "mcp-db-navigator"
-version = "1.0.1"
+version = "1.0.2"
 description = "A powerful MySQL/MariaDB database navigation tool using MCP (Model Control Protocol)."
 authors = [
     { name = "Ahmed S. Said-ahmed", email = "ahmed@pharoslab.net" }

@@ -1,5 +1,7 @@
 #!/bin/bash
 set -e
+source ./venv/bin/activate
+pip install -r requirements.txt
 
 # Clean previous builds
 echo "Cleaning old builds..."

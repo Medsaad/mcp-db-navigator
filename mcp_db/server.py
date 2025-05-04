@@ -1,5 +1,4 @@
 # --- Standard Library Imports ---
-import os
 import sys
 import logging
 import json
@@ -21,12 +20,15 @@ from mcp_db.metrics import MetricsTracker, track_query_metrics
 # ==============================================================================
 # Logging Configuration
 # ==============================================================================
+log_dir = Path.home() / ".mcp"
+log_dir.mkdir(parents=True, exist_ok=True)
+log_file = log_dir / "mcp-db.log"
 logging.basicConfig(
     level=logging.INFO, 
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(sys.stdout), # Log to console
-        logging.FileHandler(os.path.join(os.path.expanduser('~'), '.mcp', 'mcp-db.log'))      # Log to file
+        logging.FileHandler(log_file, encoding='utf-8')
     ]
 )
 logger = logging.getLogger(__name__)

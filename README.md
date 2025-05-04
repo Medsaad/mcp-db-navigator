@@ -14,6 +14,24 @@ A powerful MySQL/MariaDB database navigation tool using MCP (Model Control Proto
 - Connection pooling and retry mechanisms
 - SSL/TLS support for secure connections
 
+## Log File Location (Cross-Platform)
+
+By default, all logs are written to:
+
+- **Windows:** `C:\Users\<YourUsername>\.mcp\mcp-db.log`
+- **macOS/Linux:** `/home/<yourusername>/.mcp/mcp-db.log` or `/Users/<yourusername>/.mcp/mcp-db.log`
+
+If the `.mcp` folder does not exist in your home directory, the application will automatically create it. If you run into any issues, you can manually create the folder:
+
+**Windows:**
+```powershell
+mkdir $env:USERPROFILE\.mcp
+```
+**macOS/Linux:**
+```bash
+mkdir -p ~/.mcp
+```
+
 ## Installation
 
 ### From PyPI (recommended for most users):

@@ -1,5 +1,7 @@
 #!/bin/bash
 set -e
+source ./venv/bin/activate
+pip install -r requirements.txt
 
 # Clean previous builds
 echo "Cleaning old builds..."
@@ -22,5 +24,5 @@ twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 echo "Done! If you see no errors above, your package is live on TestPyPI."
 echo "To install from TestPyPI, use:"
-echo "  pip install --index-url https://test.pypi.org/simple/ mcp-db"
+echo "  pip install --verbose --index-url https://test.pypi.org/simple/ mcp-db"
 echo "(You may need to use a separate TestPyPI account/credentials.)" 
