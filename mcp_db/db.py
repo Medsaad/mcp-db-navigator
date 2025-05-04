@@ -1,6 +1,8 @@
 from pydantic import BaseModel, Field, SecretStr, field_validator
 from typing import Optional, List, Dict, Any
+import logging
 
+logger = logging.getLogger(__name__)
 
 class DatabaseCredentials(BaseModel):
     """Pydantic model for database credentials"""
@@ -9,6 +11,9 @@ class DatabaseCredentials(BaseModel):
     database: str = Field(..., description="Database name")
     username: str = Field(..., description="Database username")
     password: SecretStr = Field(..., description="Database password")
+    ssl_ca: Optional[str] = Field(default=None, description="SSL CA certificate")
+    max_retries: int = Field(default=3, description="Maximum number of retries")
+    retry_delay: float = Field(default=1.0, description="Retry delay in seconds")
     
 
 class SelectQuery(BaseModel):
@@ -29,7 +34,7 @@ class SelectQuery(BaseModel):
         default=None,
         description="List of fields to order by"
     )
-    order_direction: Optional[str] = Field(
+    order_direction: str = Field(
         default="ASC",
         description="Sort direction (ASC or DESC)",
         pattern="^(ASC|DESC)$"
@@ -57,14 +62,14 @@ class SelectQuery(BaseModel):
         default=None,
         description="Name of the table to join with"
     )
-    join_type: Optional[str] = Field(
+    join_type: str = Field(
         default="INNER",
         description="Type of JOIN operation",
         pattern="^(INNER|LEFT|RIGHT|FULL)$"
     )
-    join_conditions: Optional[Dict[str, str]] = Field(
+    join_conditions: Optional[List[str]] = Field(
         default=None,
-        description="Dictionary of join conditions (field pairs)"
+        description="List of join conditions (field pairs)"
     )
 
     @field_validator('table_name')
@@ -88,3 +93,6 @@ class SelectQuery(BaseModel):
                 if value is None:
                     raise ValueError('where_conditions values cannot be None')
         return v
+
+    class Config:
+        arbitrary_types_allowed = True

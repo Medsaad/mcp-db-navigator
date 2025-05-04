@@ -1,0 +1,31 @@
+[project]
+name = "mcp-db-navigator"
+version = "1.0.0"
+description = "A powerful MySQL/MariaDB database navigation tool using MCP (Model Control Protocol)."
+authors = [
+    { name = "Ahmed Saad", email = "ahmed@pharoslab.net" }
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+requires-python = ">=3.8"
+
+# Dependencies (from requirements.txt)
+dependencies = [
+    "python-dotenv",
+    "mysql-connector-python",
+    "pydantic",
+    "fastmcp",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/mcp-db"
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+mcp-db = "mcp_db.server:main_cli" 
